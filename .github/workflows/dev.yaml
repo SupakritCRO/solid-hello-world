@@ -39,7 +39,7 @@ jobs:
         run: |
           echo "No changed files in relevant paths. SADDDDDD"
       - name: Print Changes
-        if: steps.filter.outputs.changesAffectedDockerFile == 'true'
+        if: needs.detect-changes.outputs.changesAffectedDockerFile == 'true'
         run: |
           echo "Changed files in relevant paths:"
           echo "${{ steps.filter.outputs.changesAffectedDockerFile }}"
