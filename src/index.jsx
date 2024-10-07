@@ -1,4 +1,4 @@
-/* @refresh reload */
+/* @refresh reload */ // Enable Fast Refresh
 import { render } from 'solid-js/web';
 
 import './index.css';
