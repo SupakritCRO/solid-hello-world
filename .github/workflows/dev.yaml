@@ -31,7 +31,9 @@ jobs:
     needs: detect-changes
     steps:
       - name: Intro
-        run: echo "Checking for changes in relevant paths"
+        run: echo "Checking for changes in relevant paths ..."
+      - name: results
+        run: echo "Changes affected Dockerfile --> ${{ needs.detect-changes.outputs.changesAffectedDockerFile }}"
       - name: Print Not Changes
         if: steps.filter.outputs.changesAffectedDockerFile == 'false'
         run: |
