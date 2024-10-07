@@ -10,6 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       changesAffectedDockerFile: ${{ steps.filter.outputs.changesAffectedDockerFile }}
+      changes: ${{ steps.filter.outputs.changes }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -36,5 +37,4 @@ jobs:
         if: needs.detect-changes.outputs.changesAffectedDockerFile == 'true'
         run: |
           echo "Changed files in relevant paths:"
-          echo "${{ steps.filter.outputs.changesAffectedDockerFile }}"
-      
+          echo "${{ needs.detect-changes.outputs.changes }}"
