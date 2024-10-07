@@ -1,0 +1,35 @@
+name: test dorny path
+
+on:
+  push:
+    branches:
+      - dev
+
+jobs:
+  detect-changes:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Filter Changed Files
+        id: filter
+        uses: dorny/paths-filter@v2
+        with:
+          base: dev
+          filters: |
+            changesAffectedDockerFile:
+              - 'src/**'
+              - 'data/**'
+              - 'templates/**'
+              - 'Dockerfile'
+  
+  print-changes:
+    runs-on: ubuntu-latest
+    needs: detect-changes
+    steps:
+      - name: Print Changes
+        if: needs.detect-changes.outputs.changesAffectedDockerFile == 'true'
+        run: |
+          echo "Changed files in relevant paths:"
+          echo "${{ steps.filter.outputs.changesAffectedDockerFile }}"
