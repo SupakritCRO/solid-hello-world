@@ -29,7 +29,7 @@ jobs:
     needs: detect-changes
     steps:
       - name: Print Changes
-        if: needs.detect-changes.outputs.changesAffectedDockerFile == 'true'
+        if: steps.filter.outputs.changesAffectedDockerFile == 'true'
         run: |
           echo "Changed files in relevant paths:"
           echo "${{ steps.filter.outputs.changesAffectedDockerFile }}"
