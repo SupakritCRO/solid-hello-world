@@ -8,6 +8,8 @@ on:
 jobs:
   detect-changes:
     runs-on: ubuntu-latest
+    outputs:
+      changesAffectedDockerFile: ${{ steps.filter.outputs.changesAffectedDockerFile }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
