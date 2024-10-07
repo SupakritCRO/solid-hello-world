@@ -30,8 +30,13 @@ jobs:
     runs-on: ubuntu-latest
     needs: detect-changes
     steps:
+      - name: Print Not Changes
+        if: steps.filter.outputs.changesAffectedDockerFile == 'false'
+        run: |
+          echo "No changed files in relevant paths. SADDDDDD"
       - name: Print Changes
         if: steps.filter.outputs.changesAffectedDockerFile == 'true'
         run: |
           echo "Changed files in relevant paths:"
           echo "${{ steps.filter.outputs.changesAffectedDockerFile }}"
+    
